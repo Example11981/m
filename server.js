@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path');
+const path = require('path'); // ?
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 
 // Enable cross-origin access through the CORS middleware
 // NOTICE: For React development server only!
-if (process.env.CORS) {
+if (1) {
   app.use(cors());
 }
 
@@ -59,8 +59,8 @@ const server = app.listen(port, () => {
 });
 
 // Set up socket.io
-const io = socket(server,{
-  cors:{
+const io = socket(server, {
+  cors: {
     origin: config.react_app_url,
   }
 });

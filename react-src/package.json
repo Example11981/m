@@ -7,6 +7,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.7.4",
+    "mern-crud": "file:",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
@@ -16,8 +17,8 @@
     "web-vitals": "^3.4.0"
   },
   "scripts": {
-    "start": "REACT_APP_API_URL=http://127.0.0.1:3000 PORT=4200 react-scripts start",
-    "build": "BUILD_PATH='../public' react-scripts build",
+    "start": "set REACT_APP_API_URL=http://127.0.0.1:3000 && set PORT=4200 && react-scripts start",
+    "build": "set BUILD_PATH='../public' && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

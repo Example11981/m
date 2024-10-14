@@ -14,7 +14,7 @@ class App extends Component {
   constructor() {
     super();
 
-    this.server = process.env.REACT_APP_API_URL || '';
+    this.server = "http://127.0.0.1:3000" || '';
     this.socket = io(this.server);
 
     this.state = {
@@ -57,7 +57,7 @@ class App extends Component {
 
   handleUserUpdated(user) {
     let users = this.state.users.slice();
-    
+
     let i = users.findIndex(u => u._id === user._id)
 
     if (users.length > i) { users[i] = user }
@@ -89,12 +89,12 @@ class App extends Component {
             <h1 className='App-intro'>MERN CRUD</h1>
             <p>
               A simple records system using MongoDB, Express.js, React.js, and Node.js. REST API was implemented on the back-end.
-              <br/>
+              <br />
               CREATE, READ, UPDATE, and DELETE operations are updated in real-time to online users using Socket.io.
             </p>
             <a className='shirts' href='https://www.teepublic.com/en-au/user/codeweario/albums/4812-tech-stacks' target='_blank' rel='noopener noreferrer'>
-              <img src={shirts} alt='Buy MERN Shirts' />
-              <br/>Buy MERN Shirts
+              <img src={shirts} alt='BBUY MERN Shirts' />
+              <br />Buy MERN Shirts
             </a>
           </div>
         </div>
