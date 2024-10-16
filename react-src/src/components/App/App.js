@@ -5,9 +5,8 @@ import io from 'socket.io-client';
 
 import TableUser from '../TableUser/TableUser';
 import ModalUser from '../ModalUser/ModalUser';
-
+//fdfd
 import logo from '../../mern-logo.png';
-import shirts from '../../shirts.png';
 import './App.css';
 
 class App extends Component {
@@ -15,6 +14,8 @@ class App extends Component {
     super();
 
     this.server = "http://127.0.0.1:3000" || '';
+    // this.server = process.env.REACT_APP_API_URL || '';
+
     this.socket = io(this.server);
 
     this.state = {
@@ -42,6 +43,7 @@ class App extends Component {
   fetchUsers() {
     axios.get(`${this.server}/api/users/`)
       .then((response) => {
+        console.log(response.data)
         this.setState({ users: response.data });
       })
       .catch((err) => {
@@ -92,10 +94,6 @@ class App extends Component {
               <br />
               CREATE, READ, UPDATE, and DELETE operations are updated in real-time to online users using Socket.io.
             </p>
-            <a className='shirts' href='https://www.teepublic.com/en-au/user/codeweario/albums/4812-tech-stacks' target='_blank' rel='noopener noreferrer'>
-              <img src={shirts} alt='BBUY MERN Shirts' />
-              <br />Buy MERN Shirts
-            </a>
           </div>
         </div>
         <Container>
