@@ -5,16 +5,17 @@ import io from 'socket.io-client';
 
 import TableUser from '../TableUser/TableUser';
 import ModalUser from '../ModalUser/ModalUser';
-
+//fdfd
 import logo from '../../mern-logo.png';
-import shirts from '../../shirts.png';
 import './App.css';
 
 class App extends Component {
   constructor() {
     super();
 
-    this.server = process.env.REACT_APP_API_URL || '';
+    this.server = "http://127.0.0.1:3000" || '';
+    // this.server = process.env.REACT_APP_API_URL || '';
+
     this.socket = io(this.server);
 
     this.state = {
@@ -42,6 +43,7 @@ class App extends Component {
   fetchUsers() {
     axios.get(`${this.server}/api/users/`)
       .then((response) => {
+        console.log(response.data)
         this.setState({ users: response.data });
       })
       .catch((err) => {
@@ -57,7 +59,7 @@ class App extends Component {
 
   handleUserUpdated(user) {
     let users = this.state.users.slice();
-    
+
     let i = users.findIndex(u => u._id === user._id)
 
     if (users.length > i) { users[i] = user }
@@ -89,13 +91,9 @@ class App extends Component {
             <h1 className='App-intro'>MERN CRUD</h1>
             <p>
               A simple records system using MongoDB, Express.js, React.js, and Node.js. REST API was implemented on the back-end.
-              <br/>
+              <br />
               CREATE, READ, UPDATE, and DELETE operations are updated in real-time to online users using Socket.io.
             </p>
-            <a className='shirts' href='https://www.teepublic.com/en-au/user/codeweario/albums/4812-tech-stacks' target='_blank' rel='noopener noreferrer'>
-              <img src={shirts} alt='Buy MERN Shirts' />
-              <br/>Buy MERN Shirts
-            </a>
           </div>
         </div>
         <Container>

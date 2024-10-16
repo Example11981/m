@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path');
+const path = require('path'); // ?
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -7,7 +7,7 @@ const socket = require('socket.io');
 
 const config = require('./config/configs');
 
-// Use Node's default promise instead of Mongoose's promise library
+// Use Node's default promise instead of Mongoose's promise libraryOO
 mongoose.Promise = global.Promise;
 
 // Connect to the database
@@ -38,8 +38,8 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 // Enable cross-origin access through the CORS middleware
-// NOTICE: For React development server only!
-if (process.env.CORS) {
+// NOTICE: For React development server only! g
+if (1) {
   app.use(cors());
 }
 
@@ -52,15 +52,15 @@ app.use((err, req, res, next) => {
   res.status(400).json({ err: err });
 });
 
-// Start the server
+// Start the server y
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
 // Set up socket.io
-const io = socket(server,{
-  cors:{
+const io = socket(server, {
+  cors: {
     origin: config.react_app_url,
   }
 });
