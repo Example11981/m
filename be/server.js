@@ -4,14 +4,25 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const socket = require('socket.io');
-
 const config = require('./config/configs');
 
 // Use Node's default promise instead of Mongoose's promise libraryOO
 mongoose.Promise = global.Promise;
 
-// Connect to the database
-mongoose.connect(config.db);
+// mongoose.connect(config.db)
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(config.db, {
+      useNewUrlParser: true,
+    });
+    console.log(`MongoDB Connected: {conn.connection.host}`);
+  } catch (error) {
+    console.error(error.message);
+    process.exit(1);
+  }
+}
+connectDB()
+
 
 let db = mongoose.connection;
 
@@ -29,11 +40,14 @@ const app = express();
 // Don't touch this if you don't know it
 // We are using this for the express-rate-limit middleware
 // See: https://github.com/nfriedly/express-rate-limit
-app.enable('trust proxy');
+// app.enable('trust proxy', "127.0.0.1");
 
 // Set public folder using built-in express.static middleware
 app.use(express.static('public'));
 
+// use ungl
+// app.use(express.json())
+// app.use(bodyParser.urlencoded({ extend: false }))
 // Set body parser middleware
 app.use(bodyParser.json());
 

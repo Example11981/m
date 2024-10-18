@@ -1,22 +1,18 @@
 version: '3'
 services:
-  nginx:
-    image: nginx:stable-alpine
-    ports:
-      - "3000:80"
-      - "4200:80"
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
   db:
     image: mongo:latest
+
   api:
     build: .
     #image: mern-crud
     command: nodemon server
     ports:
       - "3000:3000"
+
     environment:
-      - "DB=mongodb://db/mern-crud"
+      - "PORT=3000"
+      - "DB=mongodb://103.77.242.64:27017/mern-crud"
       - "CORS=1"
       - "DEBUG=express:*"
     volumes:
@@ -24,6 +20,7 @@ services:
       - /usr/src/app/node_modules
     depends_on:
       - db
+
   web:
     build: .
     #    image: mern-crud
@@ -32,6 +29,7 @@ services:
     ports:
       - "4200:4200"
     environment:
+      - "PORT=4200"
       - "WATCHPACK_POLLING=true"
       - "REACT_APP_API_URL=http://localhost:3000"
     volumes:
