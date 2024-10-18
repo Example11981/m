@@ -15,7 +15,7 @@ mongoose.connect(config.db);
 
 let db = mongoose.connection;
 
-// this is a test comment
+// this is a test comment hii
 db.on('open', () => {
   console.log('Connected to the database.');
 });
