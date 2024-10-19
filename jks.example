@@ -30,3 +30,4 @@ pipeline{
 
     "start": "REACT_APP_API_URL=http://127.0.0.1:3000 PORT=4200 react-scripts start",
     "start": "node --env-file='.env' server",
+zzz
