@@ -41,7 +41,7 @@ pipeline{
                 sh "docker rmi -f haquochuu/m-fe:latest haquochuu/m-be:latest"
                 
                 sh "docker network ls"
-                sh "docker rm -f crud-network"
+                sh "docker network rm -f crud-network"
                 sh "docker network create -d bridge crud-network"
                 
                 sh "docker run --name m-be --network=crud-network -dp 3000:3000 haquochuu/m-be:latest"
