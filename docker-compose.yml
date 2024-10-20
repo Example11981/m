@@ -5,28 +5,32 @@ services:
     build:
       context: ./be/
       dockerfile: "Dockerfile"
-
     restart: always
     ports:
       - 3000:3000
     expose:
       - 3000
+    networks:
+      - be
 
   fe:
     container_name: fe
     build:
       context: ./fe/
       dockerfile: "Dockerfile"
-
     restart: always
     ports:
       - 80:80
+    networks:
+      - fe
 
-# networks:
-#   default:
-#     # Use a custom driver
-#     name: net
-#     driver: custom-driver-1
+networks:
+  be:
+  fe:
+    #   default:
+    #     # Use a custom driver
+    #     name: net
+    #     driver: custom-driver-1
 
-# docker compose -p app up
-# docker compose -p app up --build
+    # docker compose -p app up
+    # docker compose -p app up --build

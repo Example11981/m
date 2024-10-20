@@ -5,11 +5,10 @@
 # COPY . .
 # RUN npm run build
 
-FROM nginx AS production
-WORKDIR /app
+FROM nginx:1.27
 # COPY --from=build /app/build /app
-COPY ./build /usr/share/nginx/html
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./build /var/www/html/
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
 # rm -r build
 # npm run build
