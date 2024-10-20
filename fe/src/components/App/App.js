@@ -13,7 +13,7 @@ class App extends Component {
   constructor() {
     super();
 
-    this.server = "/" || '';
+    this.server = "localhost:3000" || '';
     // this.server = process.env.REACT_APP_API_URL || '';
 
     this.socket = io(this.server);
@@ -42,7 +42,7 @@ class App extends Component {
   // Fetch data from the back-end
   fetchUsers() {
     // axios.get(`${this.server}/api/users/`)
-    axios.get(`${this.server}/api/users/`)
+    axios.get(`${this.server}/users`)
 
       .then((response) => {
         console.log(response.data)
