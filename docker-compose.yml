@@ -10,8 +10,6 @@ services:
       - 3000:3000
     expose:
       - 3000
-    networks:
-      - be
 
   fe:
     container_name: fe
@@ -21,12 +19,6 @@ services:
     restart: always
     ports:
       - 80:80
-    networks:
-      - fe
-
-networks:
-  be:
-  fe:
     #   default:
     #     # Use a custom driver
     #     name: net
