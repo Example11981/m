@@ -13,7 +13,7 @@ class App extends Component {
   constructor() {
     super();
 
-    this.server = "http://localhost:3000" || '';
+    this.server = "http://127.0.0.1:3000" || '';
     // this.server = process.env.REACT_APP_API_URL || '';
 
     this.socket = io(this.server);
