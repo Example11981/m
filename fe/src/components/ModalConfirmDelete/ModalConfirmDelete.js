@@ -7,7 +7,7 @@ class ModalConfirmDelete extends Component {
   constructor(props) {
     super(props);
 
-    this.state ={
+    this.state = {
       modalOpen: false
     }
 
@@ -23,20 +23,22 @@ class ModalConfirmDelete extends Component {
 
     let params = e.target.getAttribute('data-userID');
 
+
     axios({
-      method: 'delete',
+      url: `api/users/${params}`,
+      baseURL: this.props.server,
+      method: 'DELETE',
       responseType: 'json',
-      url: `${this.props.server}/api/users/${params}`,
     })
-    .then((response) => {
-      this.handleClose();
-      this.props.onUserDeleted(response.data.result);
-      this.props.socket.emit('delete', response.data.result);
-    })
-    .catch((err) => {
-      this.handleClose();
-      throw err;
-    });
+      .then((response) => {
+        this.handleClose();
+        this.props.onUserDeleted(response.data.result);
+        this.props.socket.emit('delete', response.data.result);
+      })
+      .catch((err) => {
+        this.handleClose();
+        throw err;
+      });
   }
 
   render() {
@@ -55,7 +57,7 @@ class ModalConfirmDelete extends Component {
         <Modal.Actions>
           <Button onClick={this.handleSubmit} data-userID={this.props.user._id} color='red'>Yes</Button>
           <Button onClick={this.handleClose} color='black'>No</Button>
-          </Modal.Actions>
+        </Modal.Actions>
       </Modal>
     );
   }

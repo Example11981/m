@@ -12,7 +12,7 @@ class FormUser extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
       name: '',
       email: '',
@@ -31,18 +31,21 @@ class FormUser extends Component {
   componentWillMount() {
     // Fill in the form with the appropriate data if user id is provided
     if (this.props.userID) {
-      axios.get(`${this.props.server}/api/users/${this.props.userID}`)
-      .then((response) => {
-        this.setState({
-          name: response.data.name,
-          email: response.data.email,
-          age: response.data.age ?? '',
-          gender: response.data.gender,
-        });
+      let axiosInstance = axios.create({
+        baseURL: this.props.server
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      axiosInstance.get(`api/users/${this.props.userID}`)
+        .then((response) => {
+          this.setState({
+            name: response.data.name,
+            email: response.data.email,
+            age: response.data.age ?? '',
+            gender: response.data.gender,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
 
@@ -83,50 +86,107 @@ class FormUser extends Component {
     const method = this.props.userID ? 'put' : 'post';
     const params = this.props.userID ? this.props.userID : '';
 
-    axios({
-      method: method,
-      responseType: 'json',
-      url: `${this.props.server}/api/users/${params}`,
-      data: user
+    let axiosInstance = axios.create({
+      baseURL: this.props.server
     })
-    .then((response) => {
-      this.setState({
-        formClassName: 'success',
-        formSuccessMessage: response.data.msg
-      });
 
-      if (!this.props.userID) {
-        this.setState({
-          name: '',
-          email: '',
-          age: '',
-          gender: ''
-        });
-        this.props.onUserAdded(response.data.result);
-        this.props.socket.emit('add', response.data.result);
-      }
-      else {
-        this.props.onUserUpdated(response.data.result);
-        this.props.socket.emit('update', response.data.result);
-      }
-      
-    })
-    .catch((err) => {
-      if (err.response) {
-        if (err.response.data) {
+    if (method === "put") {
+
+      axios({
+        url: `api/users/${params}`,
+        baseURL: this.props.server,
+        method: 'PUT',
+        responseType: 'json',
+        data: user
+      })
+        .then((response) => {
           this.setState({
-            formClassName: 'warning',
-            formErrorMessage: err.response.data.msg
+            formClassName: 'success',
+            formSuccessMessage: response.data.msg
           });
-        }
-      }
-      else {
-        this.setState({
-          formClassName: 'warning',
-          formErrorMessage: 'Something went wrong. ' + err
+
+          if (!this.props.userID) {
+            this.setState({
+              name: '',
+              email: '',
+              age: '',
+              gender: ''
+            });
+            this.props.onUserAdded(response.data.result);
+            this.props.socket.emit('add', response.data.result);
+          }
+          else {
+            this.props.onUserUpdated(response.data.result);
+            this.props.socket.emit('update', response.data.result);
+          }
+
+        })
+        .catch((err) => {
+          if (err.response) {
+            if (err.response.data) {
+              this.setState({
+                formClassName: 'warning',
+                formErrorMessage: err.response.data.msg
+              });
+            }
+          }
+          else {
+            this.setState({
+              formClassName: 'warning',
+              formErrorMessage: 'Something went wrong. ' + err
+            });
+          }
         });
+    } else {
+      axios({
+        url: `api/users/${params}`,
+        baseURL: this.props.server,
+        method: 'POST',
+        responseType: 'json',
+        data: user
       }
-    });
+
+      )
+        .then((response) => {
+          this.setState({
+            formClassName: 'success',
+            formSuccessMessage: response.data.msg
+          });
+
+          if (!this.props.userID) {
+            this.setState({
+              name: '',
+              email: '',
+              age: '',
+              gender: ''
+            });
+            this.props.onUserAdded(response.data.result);
+            this.props.socket.emit('add', response.data.result);
+          }
+          else {
+            this.props.onUserUpdated(response.data.result);
+            this.props.socket.emit('update', response.data.result);
+          }
+
+        })
+        .catch((err) => {
+          if (err.response) {
+            if (err.response.data) {
+              this.setState({
+                formClassName: 'warning',
+                formErrorMessage: err.response.data.msg
+              });
+            }
+          }
+          else {
+            this.setState({
+              formClassName: 'warning',
+              formErrorMessage: 'Something went wrong. ' + err
+            });
+          }
+        });
+    }
+
   }
 
   render() {
