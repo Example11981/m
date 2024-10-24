@@ -1,7 +1,7 @@
 version: "3"
 services:
   be:
-    container_name: be
+    container_name: ${NAME_BE}
     build:
       context: ./be/
       dockerfile: "Dockerfile"
@@ -10,15 +10,19 @@ services:
       - 3000:3000
     expose:
       - 3000
+    environment:
+      - NAME_BE = ${NAME_BE}
 
   fe:
-    container_name: fe
+    container_name: ${NAME_FE}
     build:
       context: ./fe/
       dockerfile: "Dockerfile"
     restart: always
     ports:
       - 80:80
+    environment:
+      - NAME_FE=${NAME_FE}
     #   default:
     #     # Use a custom driver
     #     name: net
