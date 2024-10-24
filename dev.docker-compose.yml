@@ -1,0 +1,28 @@
+version: "3"
+services:
+  be:
+    build:
+      context: ./be/
+      dockerfile: "Dockerfile"
+    # volumes:
+
+    ports:
+      - "3000:3000"
+    environment:
+      - "database=mongodb://103.77.242.64:27017/mern"
+      - "react_app_url = http://localhost/"
+  fe:
+    build:
+      context: ./fe
+      dockerfile: "dev.Dockerfile"
+    restart: always
+    # volumes:
+
+    ports:
+      - "4200:4200"
+    environment:
+      - "REACT_APP_API_URL=http://127.0.0.1:3000"
+    depends_on:
+      - be
+    # command: npm start
+    # command: cd /app && npm start
