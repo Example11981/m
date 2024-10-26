@@ -11,6 +11,7 @@ services:
     expose:
       - 3000
     environment:
+      - DB=${DB}
       - NAME_BE = ${NAME_BE}
 
   fe:
