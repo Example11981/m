@@ -2,7 +2,7 @@
 
 module.exports = {
   // db: process.env.DB,
-  DB: process.env.DB || "mongodb://0.0.0.0:27017/mern",
+  DB: process.env.DB || "mongodb://103.77.242.64:27017/mern",
   // db: "mongodb://0.0.0.0:27017/mern",
   // db: "mongodb://localhost/mern-crud",
   // react_app_url: "http://127.0.0.1:4200",
