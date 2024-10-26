@@ -86,10 +86,6 @@ class FormUser extends Component {
     const method = this.props.userID ? 'put' : 'post';
     const params = this.props.userID ? this.props.userID : '';
 
-    let axiosInstance = axios.create({
-      baseURL: this.props.server
-    })
-
     if (method === "put") {
 
       axios({

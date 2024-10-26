@@ -52,6 +52,14 @@ pipeline{
     }
 }
 
-    "start": "REACT_APP_API_URL=http://127.0.0.1:3000 PORT=4200 react-scripts start",
-    "start": "node --env-file='.env' server",
+ <!-- tmp dummy -->
 
+    <!-- "start": "REACT_APP_API_URL=http://127.0.0.1:3000 PORT=4200 react-scripts start",
+    "start": "node --env-file='.env' server", -->
+
+run docker compose:
+docker-compose -f dev.docker-compose.yml down
+docker-compose -f dev.docker-compose.yml up -d --build
+
+delete cache and all things:
+ docker system prune -a

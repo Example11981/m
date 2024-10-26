@@ -12,7 +12,7 @@ mongoose.Promise = global.Promise;
 // mongoose.connect(config.db)
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(config.db, {
+    const conn = await mongoose.connect(config.DB, {
       useNewUrlParser: true,
     });
     console.log(`MongoDB Connected: {conn.connection.host}`);
@@ -22,7 +22,6 @@ const connectDB = async () => {
   }
 }
 connectDB()
-
 
 let db = mongoose.connection;
 
@@ -34,7 +33,7 @@ db.on('error', (err) => {
   console.log(`Database error: ${err}`);
 });
 
-// Instantiate express
+// Instantiate expressyy
 const app = express();
 
 // Don't touch this if you don't know it
@@ -67,7 +66,6 @@ app.use(
   )
 );
 
-
 // Initialize routes middleware
 app.use('/api/users', require('./routes/users'));
 
@@ -77,8 +75,9 @@ app.use((err, req, res, next) => {
   res.status(400).json({ err: err });
 });
 
-// Start the server y
+// Start the server
 const port = process.env.PORT || 3000;
+console.log(process.env.port)
 const server = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });

@@ -13,11 +13,11 @@ class App extends Component {
   constructor() {
     super();
 
-    this.server = "/" || " ";
+    // this.server = "/" || " ";
 
-    // this.server = process.env.REACT_APP_API_URL || '';
-
-    this.socket = io(this.server);
+    this.server = process.env.REACT_APP_API_URL || '/';
+    this.client = process.env.react_app_url || '/';
+    this.socket = io(this.client);
 
     this.state = {
       users: [],

@@ -1,36 +1,35 @@
 version: "3"
 services:
-  db:
-    build: .
-    image: mongo:noble
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./data:/data/db
-
+  # nginx:
+  #   build: .
+  #   ports:
+  #     - "80:80"
+  #     - "3000:3000"
+  #     - "4200:4200"
   be:
     build:
-      context: ./be
-      dockerfile: "dev.Dockerfile"
+      context: .
+      # context: ./be
+      # dockerfile: "dev.Dockerfile"
     volumes:
-      - ./be:/app/be
-      - /app/be/node_modules
+      - ./be:/app/
+      - /app/node_modules
     ports:
       - "3000:3000"
     environment:
       - PORT=3000
       - CORS=1
       - DEBUG=express:*
-      - DB=mongodb://db:27017/mern
+      - db=mongodb://103.77.242.64:27017/mern
       - react_app_url=http://localhost/
+
     command: "nodemon -L server.js"
-    depends_on:
-      - db
 
   fe:
     build:
-      context: ./fe
-      dockerfile: "dev.Dockerfile"
+      context: .
+      # context: ./fe
+      # dockerfile: "dev.Dockerfile"
     restart: always
     volumes:
       - ./fe:/app/fe
@@ -38,10 +37,8 @@ services:
     ports:
       - "80:80"
     environment:
-      - PORT=80
       - WATCHPACK_POLLING=true
       - REACT_APP_API_URL=http://127.0.0.1:3000
-    command: "npm run start"
+      - PORT=80
 
-volumes:
-  data:
+    command: "npm run --prefix fe start"
