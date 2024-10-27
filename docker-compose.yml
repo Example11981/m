@@ -13,7 +13,6 @@ services:
     environment:
       - DB=${DB}
       - NAME_BE = ${NAME_BE}
-
   fe:
     container_name: ${NAME_FE}
     build:

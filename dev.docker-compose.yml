@@ -41,6 +41,8 @@ services:
       - PORT=80
       - WATCHPACK_POLLING=true
       - REACT_APP_API_URL=http://127.0.0.1:3000
+    depends_on:
+      - be
     command: "npm run start"
 
 volumes:

@@ -1,11 +1,10 @@
-FROM node:20-alpine AS build
+FROM node:20-alpine
 RUN mkdir -p /app/fe
 WORKDIR /app/fe
 COPY package*.json .
 RUN npm install
-
 COPY . .
-EXPOSE 4200
+EXPOSE 80
 
 # FROM nginx:1.27
 # WORKDIR /app/fe
