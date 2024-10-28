@@ -14,9 +14,5 @@ RUN npm install
 COPY ./be .
 
 FROM mongo:noble
-# FROM nginx:1.27
-# WORKDIR /app
-# COPY --from=base . .
-# COPY ./fe/nginx/dev.default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 3000 4200
